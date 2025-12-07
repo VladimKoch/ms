@@ -1,0 +1,13 @@
+services:
+	- App\Core\RouterFactory::createRouter
+	- App\Model\Authenticator
+	- App\Presentation\Api\ApiPresenter(apiKeys: %apiKeys%)
+
+
+search:
+	-	in: %appDir%
+		classes:
+			- *Facade
+			- *Factory
+			- *Repository
+			- *Service

@@ -1,0 +1,39 @@
+# see https://doc.nette.org/en/configuring
+
+parameters:
+	apiKeys:
+		- 'tajny-klic-12345'
+		- 'druhy-klic-xyz'
+
+
+application:
+	errorPresenter:
+		4xx: Error:Error4xx
+		5xx: Error:Error5xx
+	mapping: App\Presentation\*\**Presenter
+
+
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=msucto;charset=utf8mb4;'
+	user: 'root'
+	password:
+
+
+latte:
+	strictTypes: yes
+	strictParsing: yes
+	extensions:
+		- App\Presentation\Accessory\LatteExtension
+
+
+assets:
+	mapping:
+		default:
+			path: assets
+			# type: vite  # Uncomment to activate Vite for asset building
+
+
+di:
+	export:
+		parameters: no
+		tags: no

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Admin MS Domácí e-účetnictví</title>
+    
+    <link rel="stylesheet" href="{$basePath}/css/admin.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+
+/* Reset a základní nastavení */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; }
+
+/* Rozložení stránky: Sidebar + Obsah vedle sebe */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh; /* Roztáhne se na celou výšku okna */
+}
+
+/* === SIDEBAR STYLY === */
+.sidebar {
+    width: 260px; /* Pevná šířka panelu */
+    /* Gradient podle vašeho designu (modrá -> fialová) */
+    background: linear-gradient(160deg, #2b58de 0%, #8b2ce8 100%);
+    color: white;
+    flex-shrink: 0; /* Zabrání smrsknutí sidebaru */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar-header {
+    padding: 25px 20px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-menu ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: rgba(255,255,255,0.8); /* Mírně průhledná bílá */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.sidebar-menu li a i {
+    width: 30px; /* Pevná šířka pro ikony pro zarovnání textu */
+}
+
+/* Hover efekt (po najetí myší) */
+.sidebar-menu li a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    padding-left: 30px; /* Jemný posun textu doprava */
+}
+
+/* Aktivní odkaz (aktuální stránka) */
+.sidebar-menu li a.active {
+    background-color: white;
+    color: #8b2ce8; /* Fialové písmo na bílém pozadí */
+    font-weight: bold;
+    border-left: 5px solid #2b58de; /* Modrý proužek vlevo */
+}
+
+.separator {
+    margin: 15px 25px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* === HLAVNÍ OBSAH === */
+.main-content {
+    flex-grow: 1; /* Zabere zbytek místa */
+    padding: 30px;
+    background-color: #f8f9fa; /* Světle šedé pozadí pro obsah */
+    overflow-y: auto; /* Pokud je obsah dlouhý, roluje se jen tato část */
+}
+
+/* Styl pro flash messages */
+.flash { padding: 10px; margin-bottom: 20px; border-radius: 5px; }
+.flash.success { background: #d4edda; color: #155724; }
+.flash.error { background: #f8d7da; color: #721c24; }
+
+
+</style>
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+{* <div>
+<button><a n:href="admin:responses">Objednávky</a></button>
+<button><a n:href="admin:users">users</a></button>
+</div> *}
+
+<!-- --- HLAVIČKA --- -->
+<div class="admin-wrapper">
+{snippet sidebarSnippet}
+{include sidebar.latte}
+{/snippet}
+
+<!-- --- OBSAH STRÁNKY --- -->
+{snippet contentSnippet}
+{include content}
+{/snippet}
+
+</div> 
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.min.js"></script>
+    
+<script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        naja.initialize();
+    });
+</script>
+
+    <!-- Flash message auto-hide script -->
+    <script>
+        setTimeout(function() {
+            let alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                let bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+    </script>
+
+</body>
+</html>

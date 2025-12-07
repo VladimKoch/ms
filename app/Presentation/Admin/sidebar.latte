@@ -1,0 +1,46 @@
+  <div class="admin-wrapper">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-feather-alt"></i> <span>MS Admin</span>
+            </div>
+    {snippet sidebarSnippet}
+            <nav class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a n:href="admin:default" n:class="'ajax', $presenter->isLinkCurrent('admin:default') ? 'active'">
+                            <i class="fas fa-home"></i> Přehled
+                        </a>
+                    </li>
+                    <li>
+                        <a n:href="admin:responses" n:class="'ajax', $presenter->isLinkCurrent('admin:responses') ? 'active'">
+                            <i class="fas fa-file-invoice"></i> Poptávky
+                        </a>
+                    </li>
+                    <li>
+                        <a n:href="admin:users" n:class="'ajax', $presenter->isLinkCurrent('admin:users') ? 'active'">
+                            <i class="fas fa-users"></i> Klienti
+                        </a>
+                    </li>
+                    
+                    <li class="separator"></li>
+                    
+                    <li>
+                        <a n:href="Sign:out">
+                            <i class="fas fa-sign-out-alt"></i> Odhlásit se
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+    {/snippet}
+        </aside>
+
+        <main class="main-content">
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>{}
+    {* {snippet contentSnippet}
+    {include content} Ahoj
+    {/snippet} *}
+            
+            
+        </main>
+    </div>

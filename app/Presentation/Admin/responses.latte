@@ -1,0 +1,122 @@
+{layout '@admin.latte'}
+{block content}
+
+<main class="main-content">
+<div class="container mt-5">
+    <h1 class="mb-4">Administrace Uživatelů</h1>
+    
+    <button id="btn-reload" class="btn btn-primary mb-3">
+        <i class="fa fa-sync"></i> Načíst data
+    </button>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle">
+                    <thead class="" style="background-color: #227dd8ff;color:purple">
+                        <tr>
+                            <th>id</th>
+                            <th>time_date</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>phone</th>
+                            <th>annual_turnover</th>
+                            <th>property_cards</th>
+                        </tr>
+                    </thead>
+                        
+                    <tbody id="data-container">
+                      {foreach $responses as $response}
+                        <tr>
+                            <td>{$response->id}</td>
+                            
+                            <td>{$response->time_date}</td> 
+                            <td>{$response->name}</td>
+                            <td>{$response->email}</td>
+                            <td>{$response->phone}</td> <td>...</td>
+                        </tr>
+                    {else}
+                        <tr>
+                            <td colspan="15" class="text-center">Žádné záznamy</td>
+                        </tr>
+                    {/foreach}
+                        
+                        {* <tr><td colspan="5" class="text-center">Načítám data...</td></tr> *}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+ </main>
+
+
+<script n:syntax="off">
+    document.addEventListener("DOMContentLoaded", function() {
+        loadData(); // Načíst data ihned po startu
+        
+        // Funkce pro načtení dat
+        document.getElementById('btn-reload').addEventListener('click', loadData);
+    });
+
+    async function loadData() {
+        const tableBody = document.getElementById('data-container');
+        
+        try {
+            // 1. Zavoláme vaše API (ApiPresenter)
+            // Upravte 'table=users' podle názvu vaší tabulky v DB
+            const response = await fetch('http://localhost/ms/www/api/read?table=responses'); 
+            const data = await response.json();
+
+            // 2. Vymažeme starý obsah tabulky
+            tableBody.innerHTML = '';
+
+            // 3. Projdeme data a vytvoříme řádky
+            data.forEach(row => {
+                // Pozor: Názvy sloupců (row.id, row.email...) musí sedět s vaší databází!
+                const htmlRow = `
+                    <tr>
+                        <td><b>${row.id}</b></td>
+                        <td>${row.time_date || '-'}</td> 
+                        <td>${row.name|| '-'}</td>
+                        <td>${row.email|| '-'}</td>
+                        <td>${row.phone|| '-'}</td>
+                        <td>${row.annual_turnover|| '-'}</td>
+                        <td>${row.property_cards|| '-'}</td>
+                        
+                        <td>${row.employe || '-'}</td>
+                        <td>${row.documents || '-'}</td>
+                        <td>${row.dlegal_form || '-'}</td>
+                        <td>${row.business || '-'}</td>
+                        <td>${row.interest || '-'}</td>
+                        <td>${row.taxPay || '-'}</td>
+                        <td>${row.info || '-'}</td>
+                        
+                        <td>
+                            <button class="btn btn-sm btn-warning" onclick="editItem(${row.id})">Upravit</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteItem(${row.id})">Smazat</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += htmlRow;
+            });
+
+        } catch (error) {
+            console.error('Chyba:', error);
+            tableBody.innerHTML = '<tr><td colspan="4" class="text-danger">Chyba při načítání dat!</td></tr>';
+        }
+    }
+
+    // Funkce pro tlačítka (zatím jen alert)
+    function editItem(id) {
+        alert('Edituji ID: ' + id);
+        // Tady později napojíme odeslání dat na API
+    }
+    
+    function deleteItem(id) {
+        if(confirm('Opravdu smazat ID ' + id + '?')) {
+            alert('Mazání ID: ' + id);
+        }
+    }
+</script>
+{/block}
