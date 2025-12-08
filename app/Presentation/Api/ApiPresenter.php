@@ -110,7 +110,7 @@ final class ApiPresenter extends Nette\Application\UI\Presenter
     public function actionUpdate(): void
     {
         // A. BEZPEČNOSTNÍ KONTROLA
-        // Zde jsem odstranil tvou ruční kontrolu, protože už proběhla v startup().
+        
         // Pokud se kód dostal sem, uživatel MÁ platný klíč.
 
         // B. Získání dat z požadavku

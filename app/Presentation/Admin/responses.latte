@@ -3,37 +3,76 @@
 
 <main class="main-content">
 <div class="container mt-5">
-    <h1 class="mb-4">Administrace Uživatelů</h1>
+    <h1 class="mb-4">Administrace Objednávek</h1>
     
-    <button id="btn-reload" class="btn btn-primary mb-3">
-        <i class="fa fa-sync"></i> Načíst data
-    </button>
+    <div class="d-flex gap-1 form-control justify-content-start"> 
+    <a n:href="refreshResponses!" class="btn btn-primary mb-3 ajax">
+    <i class="fa fa-sync"></i>Načíst data</a>
+
+   <form action="{link this}" method="get" class="ajax" data-naja-history="off" id="responseSearchForm">
+        <div class="input-group mb-3">
+            <input type="text" 
+                name="responseSearch" 
+                id="liveSearchInput" 
+                value="{$responseSearch}" 
+                class="form-control" 
+                placeholder="Hledat uživatele..." 
+                autocomplete="off">
+                
+            <span class="input-group-text d-none" id="searchSpinner">
+                <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+            </span>
+
+            {* <button class="btn btn-primary" type="submit">Hledat</button> *}
+            
+            {* <a n:href="refreshResponses!" n:if="$responseSearch" class="btn btn-outline-secondary ajax">
+                ✕
+            </a> *}
+        </div>
+    </form>
+    </div>
+
 
     <div class="card shadow">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle">
-                    <thead class="" style="background-color: #227dd8ff;color:purple">
+                    <thead class="table-hover" style="">
                         <tr>
                             <th>id</th>
-                            <th>time_date</th>
-                            <th>name</th>
-                            <th>email</th>
-                            <th>phone</th>
-                            <th>annual_turnover</th>
-                            <th>property_cards</th>
+                            <th>Datum</th>
+                            <th>Jméno</th>
+                            <th>e-mail</th>
+                            <th>tel.</th>
+                            <th>roční obrat</th>
+                            <th>kartičky nemovitostí</th>
+                            <th>zaměstanci</th>
+                            <th>dokumenty</th>
+                            <th>právní forma</th>
+                            <th>obchhod</th>
+                            <th>zájem</th>
+                            <th>daně</th>
+                            <th>informace</th>
                         </tr>
                     </thead>
                         
-                    <tbody id="data-container">
+                    <tbody n:snippet="tabulkaZaznamu">
                       {foreach $responses as $response}
                         <tr>
                             <td>{$response->id}</td>
-                            
                             <td>{$response->time_date}</td> 
                             <td>{$response->name}</td>
                             <td>{$response->email}</td>
-                            <td>{$response->phone}</td> <td>...</td>
+                            <td>{$response->phone}</td>
+                            <td>{$response->annual_turnover}</td>
+                            <td>{$response->property_cards}</td>
+                            <td>{$response->employe}</td>
+                            <td>{$response->documents}</td>
+                            <td>{$response->legal_form}</td>
+                            <td>{$response->business}</td>
+                            <td>{$response->interest}</td>
+                            <td>{$response->taxPay}</td>
+                            <td>{$response->info}</td>
                         </tr>
                     {else}
                         <tr>
@@ -51,7 +90,7 @@
  </main>
 
 
-<script n:syntax="off">
+{* <script n:syntax="off">
     document.addEventListener("DOMContentLoaded", function() {
         loadData(); // Načíst data ihned po startu
         
@@ -118,5 +157,54 @@
             alert('Mazání ID: ' + id);
         }
     }
+</script> *}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let timeout = null;
+        const spinner = document.getElementById('searchSpinner');
+
+        // POSLOUCHÁME NA CELÉM TĚLE DOKUMENTU (Event Delegation)
+        // Díky tomu to funguje i po překreslení AJAXem
+        document.body.addEventListener('input', function (e) {
+
+            // Zkontrolujeme, zda událost vyvolal náš input (podle ID)
+            if (e.target && e.target.id === 'liveSearchInput') {
+                
+                const form = e.target.closest('form');
+
+                // 1. Zobrazíme spinner
+                if (spinner) spinner.classList.remove('d-none');
+
+                // 2. Resetujeme odpočet
+                clearTimeout(timeout);
+
+                // 3. Spustíme nový odpočet
+                timeout = setTimeout(function () {
+                    // Odešleme formulář
+                    // Toto automaticky zachytí Nette/Naja script
+                    if (form) {
+                        form.requestSubmit();
+                    }
+                }, 500);
+            }
+        });
+        
+        // --- Vypnutí spinneru po dokončení AJAXu ---
+        
+        // Verze pro Naja (moderní Nette)
+        if (typeof naja !== "undefined") {
+            naja.addEventListener('complete', () => {
+                if (spinner) spinner.classList.add('d-none');
+            });
+        }
+        
+        // Verze pro jQuery / nette.ajax.js (starší)
+        if (typeof $ !== "undefined") {
+             $(document).ajaxComplete(function() {
+                $('#searchSpinner').addClass('d-none');
+             });
+        }
+    });
 </script>
 {/block}

@@ -11,14 +11,14 @@ use Nette\Database\Explorer;
 
 final class SignPresenter extends Nette\Application\UI\Presenter
 {
-    private Explorer $db;
+    // private Explorer $db;
     
 
-    public function __construct(Explorer $db)
-    {
-        $this->db = $db;
+    // public function __construct(Explorer $db)
+    // {
+    //     $this->db = $db;
         
-    }
+    // }
 
 
 
