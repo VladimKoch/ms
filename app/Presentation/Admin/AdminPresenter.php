@@ -44,6 +44,63 @@ final class AdminPresenter extends Nette\Application\UI\Presenter
         }
     }
 
+    public function handleResponseDelete(int $id): void
+    {
+            // 1. Najdeme položku v databázi
+        $item = $this->database->table('responses')->get($id);
+
+        // 2. Ošetření, zda položka existuje (bezpečnost)
+        if (!$item) {
+            $this->flashMessage('Položka nebyla nalezena.', 'error');
+            $this->redirect('this'); // Nebo redrawControl, pokud je to čistě AJAX
+            
+        }
+
+        // 3. Samotné smazání
+        $item->delete();
+
+        // 4. Zpětná vazba uživateli
+        $this->flashMessage('Položka byla úspěšně smazána.', 'success');
+
+        // 5. Rozhodování AJAX vs. Klasický request
+        if ($this->isAjax()) {
+            // Pokud je požadavek AJAXem (např. přes naja.js nebo nette.ajax.js)
+            $this->redrawControl('tabulkaZaznamu'); // Překreslíme jen snippet s tabulkou
+            $this->redrawControl('responseSearchSnippet'); // Viz níže v šabloně
+        } else {
+            // Fallback pro vypnutý JS
+            $this->redirect('this');
+        }
+    }
+    public function handleUsersDelete(int $id): void
+    {
+            // 1. Najdeme položku v databázi
+        $item = $this->database->table('responses')->get($id);
+
+        // 2. Ošetření, zda položka existuje (bezpečnost)
+        if (!$item) {
+            $this->flashMessage('Položka nebyla nalezena.', 'error');
+            $this->redirect('this'); // Nebo redrawControl, pokud je to čistě AJAX
+            
+        }
+
+        // 3. Samotné smazání
+        $item->delete();
+
+        // 4. Zpětná vazba uživateli
+        $this->flashMessage('Položka byla úspěšně smazána.', 'success');
+
+        // 5. Rozhodování AJAX vs. Klasický request
+        if ($this->isAjax()) {
+            // Pokud je požadavek AJAXem (např. přes naja.js nebo nette.ajax.js)
+            $this->redrawControl('tabulkaZaznamu'); // Překreslíme jen snippet s tabulkou
+            $this->redrawControl('responseSearchSnippet'); // Viz níže v šabloně
+        } else {
+            // Fallback pro vypnutý JS
+            $this->redirect('this');
+        }
+    }
+
     public function beforeRender(): void
     {
         if ($this->isAjax()) {
@@ -102,7 +159,7 @@ final class AdminPresenter extends Nette\Application\UI\Presenter
         $this->userSearch = null;
         if ($this->isAjax()) {
             $this->redrawControl('tabulkaZaznamu');
-            $this->redirect('this');
+            // $this->redirect('this');
         } else {
             $this->redirect('this');
         }

@@ -1,8 +1,5 @@
-{* This is the welcome page, you can delete it *}
-
 {block content}
 <main>
-<!-- --- 2. HERO SEKCE --- -->
 <header class="bg" id="Home" class="hero-section shadow-lg" style="margin-top:80px;">
     {* <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" alt="Budova" class="hero-bg-img"> *}
     {* <div class="bg">
@@ -10,35 +7,30 @@
     </div> *}
     
     <div class="container position-relative text-white z-1" style="width:auto;margin-left:30px; justify-content:center; align-items:center; height: 500px; display: flex; flex-direction: column;">
-        <h1 class="display-4 fw-bold mb-4">
-            Domácí účetnictví <br>
+        <h1 class="display-5 fw-bold mb-4"> Domácí účetnictví <br>
             <span style="color: #9335f8ff;">pro klid a pohodu</span>
         </h1>
-        {* <p class="lead mb-4" style="color: black">
+        {* <p class="mb-4 fs-6" style="color: black">
             Poskytuji účetní služby a podporu pro malé i střední podnikatele.
         </p> *}
-        <div class="d-flex justify-content-center gap-3"style="height: 40px;">
+        <div class="d-flex justify-content-center gap-3" style="height: 40px;">
             <img class="icons img-fluid" src="{$basePath}/assets/img/facebook.png" alt="">
             <img class="icons img-fluid" src="{$basePath}/assets/img/instagram1.png" alt="">
             <img class="icons img-fluid" src="{$basePath}/assets/img/twitter.png" alt="">
             <img class="icons img-fluid" src="{$basePath}/assets/img/telegram.png" alt="">
             <img class="icons img-fluid" src="{$basePath}/assets/img/linkedin.png" alt="">
-        
         </div>
     </div>
 </header>
-    <!-- --- 3. SLUŽBY --- -->
-    <section id="Služby" class="py-5 mt-4"style="background-color: #ffffffff;">
+    <section id="Služby" class="py-5 mt-4" style="background-color: #ffffffff;">
         <div class="container py-4">
-            <h2 class="text-center fw-bold mb-5" style="color: #9335f8ff;">
+            <h2 class="text-center fw-bold mb-5 h3" style="color: #9335f8ff;">
                 Jaké domácí služby jsem schopna zvládnout?
-                 <p class="lead mb-4" style="color: black">
-                    Poskytuji účetní služby a podporu pro malé i střední podnikatele.
+                 <p class="fs-6 fw-normal mb-4 mt-2" style="color: black"> Poskytuji účetní služby a podporu pro malé i střední podnikatele.
                 </p>
             </h2>
 
             <div class="row g-4">
-                <!-- Karta 1 -->
                 <div class="col-md-4">
                     <div class="card service-card h-100 border-0 rounded-4 overflow-hidden">
                         <div class="service-img-wrapper">
@@ -46,14 +38,12 @@
                             <img src="{$basePath}/assets/img/kalkulackabezplochy.png" style="" class="service-img" alt="Účetnictví">
                         </div>
                         <div class="card-body text-center p-4 shadow-sm">
-                            <h3 class="h5 fw-bold mb-3">Podvojné účetnictví</h3>
-                            <p class="text-muted small mb-3">Kompletní vedení pro malé i velké firmy.</p>
-                            <a href="#" class="text-decoration-none fw-bold small text-uppercase"style="color: #9335f8ff">Více informací</a>
+                            <h3 class="h6 fw-bold mb-3">Podvojné účetnictví</h3> <p class="text-muted small mb-3">Kompletní vedení pro malé i velké firmy.</p>
+                            <a href="#" class="text-decoration-none fw-bold small text-uppercase" style="color: #9335f8ff">Více informací</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Karta 2 -->
                 <div class="col-md-4">
                     <div class="card service-card h-100 border-0 rounded-4 overflow-hidden">
                         <div class="service-img-wrapper">
@@ -61,14 +51,12 @@
                             <img src="{$basePath}/assets/img/vsebezplochy.png" class="service-img" alt="Daně">
                         </div>
                         <div class="card-body text-center p-4 shadow-sm">
-                            <h3 class="h5 fw-bold mb-3">Daňová evidence</h3>
-                            <p class="text-muted small mb-3">Zpracování daňových přiznání a přehledů.</p>
-                            <a href="#" class="text-decoration-none fw-bold small text-uppercase"style="color: #9335f8ff">Více informací</a>
+                            <h3 class="h6 fw-bold mb-3">Daňová evidence</h3> <p class="text-muted small mb-3">Zpracování daňových přiznání a přehledů.</p>
+                            <a href="#" class="text-decoration-none fw-bold small text-uppercase" style="color: #9335f8ff">Více informací</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Karta 3 -->
                 <div class="col-md-4">
                     <div class="card service-card h-100 border-0 rounded-4 overflow-hidden">
                         <div class="service-img-wrapper">
@@ -76,8 +64,7 @@
                             <img src="{$basePath}/assets/img/notasbezplochy.png" class="service-img" alt="Mzdy">
                         </div>
                         <div class="card-body text-center p-4 shadow-sm">
-                            <h3 class="h5 fw-bold mb-3">Mzdová agenda</h3>
-                            <p class="text-muted small mb-3">Výplatní pásky, smlouvy a hlášení.</p>
+                            <h3 class="h6 fw-bold mb-3">Mzdová agenda</h3> <p class="text-muted small mb-3">Výplatní pásky, smlouvy a hlášení.</p>
                             <a id="Omně"  href="#" class="text-decoration-none fw-bold small text-uppercase" style="color: #9335f8ff">Více informací</a>
                         </div>
                     </div>
@@ -86,40 +73,32 @@
         </div>
     </section>
 
-	<div class="linie"></div>
+    <div class="linie"></div>
 
-    <!-- --- 4. ODDĚLOVAČ S BRKEM --- -->
-    <section class="py-5 position-relative"style="background-color: #ffffffff;">
+    <section class="py-5 position-relative" style="background-color: #ffffffff;">
         <div class="container d-flex flex-column flex-md-row align-items-center justify-content-center gap-4 text-center text-md-start">
             {* <div class="icon-circle shadow"> *}
                 {* <i class="fa-solid fa-pen-nib"></i> *}
-				{* <img src="{$basePath}/assets/img/WhiteFeather.png" alt="Ikona pírka" style="height: 100px;"> *}
-				<img src="{$basePath}/assets/img/feather.png" alt="Ikona pírka" style="height: 100px;">
+                {* <img src="{$basePath}/assets/img/WhiteFeather.png" alt="Ikona pírka" style="height: 100px;"> *}
+                <img src="{$basePath}/assets/img/feather.png" alt="Ikona pírka" style="height: 100px;">
             {* </div> *}
-            <div style="max-width: 600px;"class="">
-                <h3 class="fw-bold mb-2" style="color: #9335f8ff;">Praxe a zkušenosti</h3>
-                <p class="text-muted mb-0">
-                    Mám 30 letou praxi. S prací pro Firmy OSVČ i v státním sektrou, na vesnici a městyse. Zakládám si na osobním přístupu a pečlivosti. 
+            <div style="max-width: 600px;" class="">
+                <h3 class="h4 fw-bold mb-2" style="color: #9335f8ff;">Praxe a zkušenosti</h3> <p class="text-muted small mb-0"> Mám 30 letou praxi. S prací pro Firmy OSVČ i ve státním sektoru, na vesnici a městyse. Zakládám si na osobním přístupu a pečlivosti. 
                     Vaše doklady jsou u mně v bezpečí a vždy zpracovány včas.
                 </p>
             </div>
         </div>
     </section>
 
-	<div class="linie"></div>
+    <div class="linie"></div>
 
-    <!-- --- 5. KONTAKTNÍ FORMULÁŘ --- -->
-    <section id="Registrace" class="py-5"style="background-color: #ffffffff;">
+    <section id="Registrace" class="py-5" style="background-color: #ffffffff;">
         <div class="container py-4" style="max-width: 800px;">
             <div class="text-center mb-5">
-                <h2 class="fw-bold" style="color: #9335f8ff;">Dejte mi vědět o svých potřebách</h2>
-                <p class="text-muted">Vyplňte formulář níže a my se vám ozveme.</p>
-            </div>
-			{snippet contactFormSnippet}
+                <h2 class="h3 fw-bold" style="color: #9335f8ff;">Dejte mi vědět o svých potřebách</h2> <p class="text-muted small">Vyplňte formulář níže a my se vám ozveme.</p> </div>
+            {snippet contactFormSnippet}
             <div class="card service-card  border-0 rounded-4 p-4 p-md-5">
-                <!-- Nette Form Rendering -->
                 {form contactForm class => 'ajax'}
-                    <!-- Výpis chyb formuláře -->
                     <div n:if="$form->hasErrors()" class="alert alert-danger">
                         <li n:foreach="$form->errors as $error">{$error}</li>
                     </div>
@@ -127,74 +106,71 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-4">
                             {label name, class => 'details' /}
-							{input name, class => 'form-control', placeholder => 'Zadejte jméno' } <!-- Automaticky vygeneruje input s class z Presenteru -->
+                            {input name, class => 'form-control', placeholder => 'Zadejte jméno' } {* <div class="invalid-feedback">
+                                {$form['name']->getError()}
+                            </div> *}
 
-							{* <div class="invalid-feedback">
-                				{$form['name']->getError()}
-            				</div> *}
-
-						</div>
+                        </div>
                         <div class="col-md-4">
                             {label email, class => 'details' /}
-								{input email,class => 'form-control',placeholder => 'Zadejte e-mail' }
+                                {input email,class => 'form-control',placeholder => 'Zadejte e-mail' }
                         </div>
                         <div class="col-md-4">
                             {label phone, class => 'details' /}
-								{input phone, class => 'form-control', placeholder => 'Telefón' }
+                                {input phone, class => 'form-control', placeholder => 'Telefón' }
                         </div>
                         <div class="col-md-4">
                             {label annual_turnover, class => 'details' /}
-								{input annual_turnover, class => 'form-control', placeholder => 'Roční obrat' }
+                                {input annual_turnover, class => 'form-control', placeholder => 'Roční obrat' }
                         </div>
                         <div class="col-md-4">
                             {label property_cards, class => 'details' /}
-								{input property_cards, class => 'form-control', placeholder => 'Počet inv. karet' }
+                                {input property_cards, class => 'form-control', placeholder => 'Počet inv. karet' }
                         </div>
                         <div class="col-md-4">
                             {label employe, class => 'details' /}
-								{input employe, class => 'form-control', placeholder => 'Počet Zaměstnanců' }
+                                {input employe, class => 'form-control', placeholder => 'Počet Zaměstnanců' }
                         </div>
                         <div class="col-md-4">
                             {label documents, class => 'details' /}
-								{input documents, class => 'form-control', placeholder => 'Počet dokladů' }
+                                {input documents, class => 'form-control', placeholder => 'Počet dokladů' }
                         </div>
                         <div class="col-md-4">
                             {label legal_form, class => 'details' /}
-								{input legal_form, class => 'form-control', placeholder => 'Právní forma' }
+                                {input legal_form, class => 'form-control', placeholder => 'Právní forma' }
                         </div>
                         <div class="col-md-4">
                            {label business, class => 'details' /}
-								{input business, class => 'form-control', placeholder => 'Předmět podníkání' }
+                                {input business, class => 'form-control', placeholder => 'Předmět podníkání' }
                         </div>
                       
                         <div class="col-md-6">
                             {label interest, class => 'details' /}
-							{input interest, class => 'form-select', placeholder => 'Mám zájem o' }
+                            {input interest, class => 'form-select', placeholder => 'Mám zájem o' }
                         </div>
                         <div class="col-md-6">
                             {label taxpay, class => 'details' /}
-							{input taxpay, class => 'form-select', placeholder => 'Jste plátce DPH?' }
+                            {input taxpay, class => 'form-select', placeholder => 'Jste plátce DPH?' }
                         </div>
                     </div>
 
                     <div class="mb-4">
                         {* {label message, class => 'details' /} *}
-						{input info, class => 'form-control', placeholder => 'Doplňujíci informace' }
+                        {input info, class => 'form-control', placeholder => 'Doplňující informace' }
                     </div>
 
                     <div class="text-center">
                         <input n:name="send">
                     </div>
-					<!-- Flash zprávy (Alerts) -->
-					<div class="container mt-4" n:if="$flashes">
-						<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type} alert-dismissible fade show shadow-lg" role="alert">
-							{$flash->message}
-							<button type="button" class="btnhover btn-close shadow-sm" data-bs-dismiss="alert" aria-label="Close"></button>
-						</div>
-					</div>
+                    <div class="container mt-4" n:if="$flashes">
+                        <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type} alert-dismissible fade show shadow-lg" role="alert">
+                            {$flash->message}
+                            <button type="button" class="btnhover btn-close shadow-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
                 {/form}
             </div>
-			{/snippet}
+            {/snippet}
         </div>
     </section>
 </main>

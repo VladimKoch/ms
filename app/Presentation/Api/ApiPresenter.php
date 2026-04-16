@@ -20,38 +20,38 @@ final class ApiPresenter extends Nette\Application\UI\Presenter
         $this->database = $database;
     }
 
-    protected function startup(): void
-    {
-        parent::startup();
+    // protected function startup(): void
+    // {
+    //     parent::startup();
         
-        // --- 1. CORS HLAVIČKY ---
-        $this->getHttpResponse()->setHeader('Access-Control-Allow-Origin', '*');
-        $this->getHttpResponse()->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, X-Api-Key'); // Přidal jsem X-Api-Key do povolených hlaviček
-        $this->getHttpResponse()->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    //     // --- 1. CORS HLAVIČKY ---
+    //     $this->getHttpResponse()->setHeader('Access-Control-Allow-Origin', '*');
+    //     $this->getHttpResponse()->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, X-Api-Key'); // Přidal jsem X-Api-Key do povolených hlaviček
+    //     $this->getHttpResponse()->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
 
-        // --- 2. VÝJIMKA PRO OPTIONS (Preflight) ---
-        // Prohlížeč posílá OPTIONS request bez API klíče, aby zjistil, zda může komunikovat.
-        // Musíme ho pustit dál bez kontroly hesla.
-        if ($this->getRequest()->getMethod() === 'OPTIONS') {
-            return;
-        }
+    //     // --- 2. VÝJIMKA PRO OPTIONS (Preflight) ---
+    //     // Prohlížeč posílá OPTIONS request bez API klíče, aby zjistil, zda může komunikovat.
+    //     // Musíme ho pustit dál bez kontroly hesla.
+    //     if ($this->getRequest()->getMethod() === 'OPTIONS') {
+    //         return;
+    //     }
 
-        // --- 3. KONTROLA API KLÍČE (Globalní pro celý Presenter) ---
-        $apiKey = $this->getHttpRequest()->getHeader('X-Api-Key');
+    //     // --- 3. KONTROLA API KLÍČE (Globalní pro celý Presenter) ---
+    //     $apiKey = $this->getHttpRequest()->getHeader('X-Api-Key');
 
-        // Pokud klíč chybí NEBO není v poli povolených klíčů ($this->validApiKeys)
-        if (!$apiKey || !in_array($apiKey, $this->validApiKeys, true)) {
+    //     // Pokud klíč chybí NEBO není v poli povolených klíčů ($this->validApiKeys)
+    //     if (!$apiKey || !in_array($apiKey, $this->validApiKeys, true)) {
             
-            // Nastavíme HTTP kód 401 Unauthorized
-            $this->getHttpResponse()->setCode(Nette\Http\IResponse::S401_Unauthorized);
+    //         // Nastavíme HTTP kód 401 Unauthorized
+    //         $this->getHttpResponse()->setCode(Nette\Http\IResponse::S401_Unauthorized);
             
-            // Odešleme chybu a UKONČÍME běh skriptu (dál se nic neprovede)
-            $this->sendJson([
-                'status' => 'error', 
-                'message' => 'Přístup odepřen: Neplatný API klíč'
-            ]);
-        }
-    }
+    //         // Odešleme chybu a UKONČÍME běh skriptu (dál se nic neprovede)
+    //         $this->sendJson([
+    //             'status' => 'error', 
+    //             'message' => 'Přístup odepřen: Neplatný API klíč'
+    //         ]);
+    //     }
+    // }
 
     // Ošetření tzv. "preflight" requestu
     public function actionOptions(): void

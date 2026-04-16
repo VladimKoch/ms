@@ -55,6 +55,7 @@
                             <td>{$people->email}</td>
                             <td>{$people->role}</td>
                             <td>{$people->createdOn}</td>
+                            <td><a n:href="usersDelete! $people->id" class="btn btn-primary">Delete</a></td>
                         </tr>
                     {else}
                         <tr>
@@ -71,89 +72,62 @@
 </div>
  </main>
 
+<script>
+    (function() {
+        // Funkce pro inicializaci logiky vyhledávání
+        const initSearchLogic = function () {
+            // Ochrana proti vícenásobnému spuštění (pokud by se snippet načítal opakovaně)
+            if (window.searchLogicInitialized) return;
+            window.searchLogicInitialized = true;
 
-{* <script n:syntax="off">
-    document.addEventListener("DOMContentLoaded", function() {
-        loadData(); // Načíst data ihned po startu
-        
-        // Funkce pro načtení dat
-        document.getElementById('btn-reload').addEventListener('click', loadData);
-    });
+            let timeout = null;
+            const spinner = document.getElementById('searchSpinner');
 
-    async function loadData() {
-        const tableBody = document.getElementById('data-container');
-        
-        try {
-            // 1. Zavoláme vaše API (ApiPresenter)
-            // Upravte 'table=users' podle názvu vaší tabulky v DB
-            const response = await fetch('http://localhost/ms/www/api/read?table=users'); 
-            const data = await response.json();
+            // Event Delegation na body je správně
+            document.body.addEventListener('input', function (e) {
+                if (e.target && e.target.id === 'liveSearchInput') {
+                    const form = e.target.closest('form');
+                    
+                    if (spinner) spinner.classList.remove('d-none');
+                    clearTimeout(timeout);
 
-            // 2. Vymažeme starý obsah tabulky
-            tableBody.innerHTML = '';
-
-            // 3. Projdeme data a vytvoříme řádky
-            data.forEach(row => {
-                // Pozor: Názvy sloupců (row.id, row.email...) musí sedět s vaší databází!
-                const htmlRow = `
-                    <tr>
-                        <td><b>${row.id}</b></td>
-                        
-                        <td>${row.name|| '-'}</td>
-                        <td>${row.email|| '-'}</td>
-                       
-                        
-                        <td>
-                            <button class="btn btn-sm btn-warning" onclick="editItem(${row.id})">Upravit</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteItem(${row.id})">Smazat</button>
-                        </td>
-                    </tr>
-                `;
-                tableBody.innerHTML += htmlRow;
+                    timeout = setTimeout(function () {
+                        if (form) {
+                            // Použití Naja/Nette Ajax pro odeslání
+                            if (typeof naja !== "undefined") {
+                                naja.uiHandler.submitForm(form);
+                            } else {
+                                // Fallback pro nativní submit nebo jQuery
+                                form.requestSubmit(); 
+                            }
+                        }
+                    }, 500);
+                }
             });
 
-        } catch (error) {
-            console.error('Chyba:', error);
-            tableBody.innerHTML = '<tr><td colspan="4" class="text-danger">Chyba při načítání dat!</td></tr>';
-        }
-    }
+            // Vypnutí spinneru
+            if (typeof naja !== "undefined") {
+                naja.addEventListener('complete', () => {
+                    if (spinner) spinner.classList.add('d-none');
+                });
+            } else if (typeof $ !== "undefined") {
+                $(document).ajaxComplete(function() {
+                    $('#searchSpinner').addClass('d-none');
+                });
+            }
+        };
 
-    // Funkce pro tlačítka (zatím jen alert)
-    function editItem(id) {
-        alert('Edituji ID: ' + id);
-        // Tady později napojíme odeslání dat na API
-    }
-    
-    function deleteItem(id) {
-        if(confirm('Opravdu smazat ID ' + id + '?')) {
-            alert('Mazání ID: ' + id);
+        // ROZHODOVACÍ LOGIKA: Spustit hned, nebo čekat na DOMContentLoaded?
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSearchLogic);
+        } else {
+            // Pokud jsme přišli přes AJAX, document.readyState už je 'complete' nebo 'interactive'
+            initSearchLogic();
         }
-    }
+    })();
 </script>
 
-<script>
-    // 1. Definujeme funkci (aby byla dostupná globálně)
-    function loadMyApiData() {
-        console.log("Načítám data z API...");
-        // ... zde je váš fetch kód ...
-    }
-
-    // 2. Spustíme ji při prvním načtení (F5)
-    document.addEventListener("DOMContentLoaded", loadMyApiData);
-
-    // 3. DŮLEŽITÉ: Spustíme ji po každém AJAX požadavku
-    // Musíme počkat, až Naja existuje
-    if (typeof naja !== "undefined") {
-        naja.addEventListener('complete', loadMyApiData);
-    } else {
-        // Fallback pro případ, že se skript načte dřív než Naja
-        document.addEventListener("DOMContentLoaded", () => {
-             naja.addEventListener('complete', loadMyApiData);
-        });
-    }
-</script> *}
-
-<script>
+{* <script>
     document.addEventListener('DOMContentLoaded', function () {
         let timeout = null;
         const spinner = document.getElementById('searchSpinner');
@@ -200,5 +174,5 @@
              });
         }
     });
-</script>
+</script> *}
 {/block}
